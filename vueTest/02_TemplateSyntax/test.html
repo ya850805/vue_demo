@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Template syntax</title>
+</head>
+<body>
+
+<div id="app">
+    <h2>1. 雙大括號表達式</h2>
+    <p>{{msg}}</p>
+    <p>{{msg.toUpperCase()}}</p>
+    <p>{{{msg}}}</p>
+    <p v-text="msg"></p> <!--textContent-->
+    <p v-html="msg"></p> <!--innerHTML-->
+
+    <h2>2. 指令一：強制數據綁定</h2>
+    <img v-bind:src="imgUrl"/>
+    <img :src="imgUrl"/>
+
+    <h2>3. 指令二：綁定事件監聽</h2>
+    <button v-on:click="test">test1</button>
+    <button @click="test2(msg)">test1</button>
+</div>
+
+<script type="text/javascript" src="../js/vue.js"></script>
+<script type="text/javascript">
+    new Vue({
+        el: '#app',
+        data: {
+            msg: '<a href="https://facebook.com">I will back!</a>',
+            imgUrl: 'https://vuejs.org/images/logo.png'
+        },
+        methods: {
+            test() {
+                alert('click!')
+            },
+            test2(content) {
+                alert(content)
+            }
+        }
+    })
+</script>
+</body>
+</html>

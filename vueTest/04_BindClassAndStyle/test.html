@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BindClassAndStyle</title>
+    <style>
+        .aClass {
+            color: red;
+        }
+        .bClass {
+            color: blue;
+        }
+        .cClass {
+            font-size: 30px;
+        }
+    </style>
+</head>
+<body>
+
+<div id="demo">
+    <h2>1. class綁定： ：class='xxx'</h2>
+    <p class="cClass" :class="a">xxx是字串</p>
+    <p :class="{aClass : isA, bClass : isB}">xxx是物件</p>
+    <p :class="['aClass', 'cClass']">xxx是陣列</p>
+
+    <h2>1. style綁定</h2>
+    <p :style="{color : activeColor, fontSize : fontSize + 'px'}">style綁定</p>
+
+    <button @click="update">更新</button>
+</div>
+
+<script type="text/javascript" src="../js/vue.js"></script>
+<script type="text/javascript">
+    new Vue({
+        el : '#demo',
+        data : {
+            a : 'aClass',
+            isA : true,
+            isB : false,
+            activeColor : 'red',
+            fontSize : 20
+        },
+        methods :{
+            update(){
+                this.a = 'bClass'
+                this.isA = false
+                this.isB = true
+                this.activeColor = 'green'
+                this.fontSize = 30
+            }
+        }
+    })
+</script>
+</body>
+</html>

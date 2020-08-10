@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ComputedPropsAndListener</title>
+</head>
+<body>
+<div id="demo">
+    姓：<input type="text" placeholder="First name" v-model="firstName" /><br>
+    名：<input type="text" placeholder="Last name" v-model="lastName" /><br>
+    姓名1(單向)：<input type="text" placeholder="Full name1" v-model="fullName1" /><br>
+    姓名2(單向)：<input type="text" placeholder="Full name2" v-model="fullName2" /><br>
+    姓名3(雙向)：<input type="text" placeholder="Full name3" v-model="fullName3" /><br>
+
+    <p>{{fullName1}}</p>
+    <p>{{fullName1}}</p>
+    <p>{{fullName1}}</p>
+</div>
+
+
+<script type="text/javascript" src="../js/vue.js"></script>
+<script type="text/javascript">
+    const vm = new Vue({
+        el : '#demo',
+        data : {
+            firstName : 'A',
+            lastName : 'B',
+            fullName2 : 'A B'
+        },
+        computed : {
+            // 什麼時候執行：初始化顯示、相關屬性發生變化
+            fullName1 () { //計算屬性中的一個方法，方法的返回值作為屬性值
+                return this.firstName + ' ' + this.lastName
+            },
+
+            fullName3 : {
+                get(){ //回調函數，監視當前屬性值的變化，當需要讀取當前屬性值時調用，根據相關的數據計算並返回當前屬性的值
+                    return this.firstName + ' ' + this.lastName
+                },
+                set(value){ //回調函數，當屬性值發生改變時調用(value就是fullName3的最新屬性值)
+                    const names = value.split(' ');
+                    this.firstName = names[0];
+                    this.lastName = names[1];
+                }
+            }
+        },
+        watch : { //配置監視
+            firstName : function(newVal, oldVal){ //firstName發生了變化
+                this.fullName2 = newVal + ' ' + this.lastName
+            }
+        }
+    })
+
+    vm.$watch('lastName', function (newVal, oldVal) {
+        //更新fullName2
+        this.fullName2 = this.firstName + ' ' + newVal
+    })
+</script>
+</body>
+</html>
