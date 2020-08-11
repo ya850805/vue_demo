@@ -32,7 +32,7 @@
         <span>城市：</span>
         <select v-model="cityId">
             <option value="">未選擇</option>
-            <option v-for="(index, city) in allCitys" :value="city.id" :key="index">{{city.name}}</option>
+            <option v-for="(city, index) in allCitys" :value="city.id" :key="index">{{city.name}}</option>
         </select><br>
         <span>介紹：</span>
         <textarea ROWS="10" v-model="desc"></textarea><br><br>

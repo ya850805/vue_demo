@@ -9,7 +9,7 @@
 <div id="demo">
     <h2>遍歷陣列</h2>
     <ul>
-        <li v-for="(index, p) in persons" :key="index">
+        <li v-for="(p, index) in persons" :key="index">
             {{index}}--{{p.name}}--{{p.age}}
             --<button @click="deleteP(index)">刪除</button>
             --<button @click="updateP(index, {name : 'update', age : 20})">更新(暫時寫死更新數據 {name : 'update', age : 20})</button>
@@ -18,7 +18,7 @@
 
     <h2>遍歷物件</h2>
     <ul>
-        <li v-for="(key, item) in persons[0]">
+        <li v-for="(item, key) in persons[0]">
             {{item}}---{{key}}
         </li>
     </ul>
