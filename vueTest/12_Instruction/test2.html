@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>自定義指令</title>
+</head>
+<body>
+
+<div id="test1">
+    <p v-upper-text="msg1"></p>
+    <p v-lower-text="msg1"></p>
+</div>
+
+<div id="test2">
+    <p v-upper-text="msg2"></p>
+    <p v-lower-text="msg2"></p>
+</div>
+
+<script type="text/javascript" src="../js/vue.js"></script>
+<script type="text/javascript">
+    //定義全局指令
+    //el:指令屬性所在標籤對象
+    //binding:包含指令相關信息數據的物件
+    Vue.directive('upper-text', function (el, binding) {
+        el.textContent = binding.value.toUpperCase();
+    })
+
+    new Vue({
+        el : '#test1',
+        data : {
+            msg1 : 'MLB I Love This Game!'
+        },
+        directives : { //局部指令，只在當前vm管理範圍內有效
+            'lower-text' : function (el, binding) {
+                el.textContent = binding.value.toLowerCase()
+            }
+        }
+    })
+
+    new Vue({
+        el : '#test2',
+        data : {
+            msg2 : 'Just Do It!'
+        }
+    })
+</script>
+</body>
+</html>
