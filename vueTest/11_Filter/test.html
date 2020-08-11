@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Filter</title>
+</head>
+<body>
+
+<div id="test">
+    <h2>顯示格式化的日期時間</h2>
+    <p>{{date}}</p>
+    <p>過濾後結果1(完整)：{{date | dateString}}</p>
+    <p>過濾後結果2(年月日)：{{date | dateString('YYYY-MM-DD')}}</p>
+    <p>過濾後結果3(時分秒)：{{date | dateString('HH:mm:ss')}}</p>
+</div>
+
+<script type="text/javascript" src="../js/vue.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/moment.js/2.27.0/moment.js"></script>
+<script type="text/javascript">
+    //自定義過濾器
+    Vue.filter('dateString', function (value, format) {
+        // 有format用format，沒的話用預設的
+        return moment(value).format(format || 'YYYY-MM-DD HH:mm:ss')
+    })
+
+    new Vue({
+        el : '#test',
+        data : {
+            date : new Date()
+        }
+    })
+</script>
+</body>
+</html>
