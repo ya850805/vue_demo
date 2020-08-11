@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue生命週期</title>
+</head>
+<body>
+
+<div id="demo">
+    <button @click="destroy">destory Vue</button>
+    <p v-show="isShow">測試文本信息</p>
+</div>
+
+<script type="text/javascript" src="../js/vue.js"></script>
+<script type="text/javascript">
+    new Vue({
+        el: '#demo',
+        data: {
+            isShow: true
+        },
+        //1. 初始化階段
+        beforeCreate() {
+            console.log('beforeCreate');
+        },
+        created() {
+            console.log('created');
+        },
+        beforeMount() {
+            console.log('beforeMount');
+        },
+        mounted() { //初始化顯示後立即調用一次
+            this.intervalId = setInterval(() => {
+                //這邊使用箭頭函數this才會是vm物件
+                console.log('=====')
+                this.isShow = !this.isShow;
+            }, 1000);
+        },
+
+        //2. 更新階段
+        beforeUpdate() {
+            console.log('beforeUpdate');
+        },
+        updated() {
+            console.log('updated');
+        },
+
+        //3. 死亡階段
+        beforeDestroy() { //死亡之前調用一次
+            //清除定時器
+            clearInterval(this.intervalId);
+        },
+        destroyed() {
+            console.log('destroyed');
+        },
+
+        methods: {
+            destroy() {
+                this.$destroy();
+            }
+        }
+    })
+
+</script>
+</body>
+</html>
