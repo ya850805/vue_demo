@@ -1,26 +1,44 @@
 <template>
   <div>
-    <img class="logo" src="./assets/logo.png" alt="logo">
-    <!--      3.使用組件標籤-->
-    <HelloWorld/>
+    <!--    上半部-->
+    <header class="site-header jumbotron">
+      <div class="container">
+        <div class="row">
+          <div class="col-xs-12">
+            <h2>vue實作發表評論</h2>
+          </div>
+        </div>
+      </div>
+    </header>
+    <!--    下半部-->
+    <div class="container row">
+      <Add/>
+      <List :comments="comments"/>
+    </div>
   </div>
 </template>
 
 <script>
-  //1. 引入組件
-  import HelloWorld from "./components/HelloWorld";
+  import Add from './components/Add'
+  import List from './components/List'
 
   export default {
     name: "App",
-    components: { //映射組件
-      HelloWorld
+    components: {
+      Add, List
+    },
+    data() {
+      return {
+        comments: [
+          {name: 'BOB', content: 'Hello!'},
+          {name: 'Anne', content: 'Hello!!'},
+          {name: 'John', content: 'Hello!!!'},
+        ]
+      }
     }
   }
 </script>
 
 <style scoped>
-  .logo {
-    width : 300px;
-    height: 300px;
-  }
+
 </style>
