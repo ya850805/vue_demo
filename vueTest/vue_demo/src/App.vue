@@ -12,8 +12,8 @@
     </header>
     <!--    下半部-->
     <div class="container row">
-      <Add/>
-      <List :comments="comments"/>
+      <Add :addComment="addComment"/>
+      <List :comments="comments" :deleteComment="deleteComment"/>
     </div>
   </div>
 </template>
@@ -29,11 +29,19 @@
     },
     data() {
       return {
-        comments: [
+        comments: [ //數據在哪個組件，更新數據的行為就應該在哪個組件
           {name: 'BOB', content: 'Hello!'},
           {name: 'Anne', content: 'Hello!!'},
           {name: 'John', content: 'Hello!!!'},
         ]
+      }
+    },
+    methods : {
+      addComment (comment) {
+        this.comments.unshift(comment);
+      },
+      deleteComment (index) {
+        this.comments.splice(index, 1);
       }
     }
   }
