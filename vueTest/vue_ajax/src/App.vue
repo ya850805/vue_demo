@@ -1,5 +1,6 @@
 <template>
   <div>
+    <h1>Search the most star repository</h1>
     <div v-show="!repoName">
       <h2>Loading...</h2>
     </div>
@@ -8,13 +9,27 @@
         The most star repository in GitHub query with "{{queryString}}" is <a :href="repoUrl">{{repoName}}</a>
       </h2>
     </div>
+
+    <hr>
+
+    <h1>Search people on GitHub</h1>
+    <Search />
+    <UsersMain />
   </div>
+
 </template>
 
 <script>
+  import Search from "./components/Search";
+  import Main from './components/Main';
+
   import axios from "axios";
 
   export default {
+    components : {
+      Search,
+      UsersMain : Main
+    },
     data () {
       return {
         queryString : 'v',
@@ -36,8 +51,6 @@
         .catch(response => {
           alert('AJAX failed...')
         })
-
-
     }
   }
 </script>
