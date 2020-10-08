@@ -2,16 +2,19 @@
   <div id="app">
     <div class="container">
       <todo-header :addTodo="addTodo"/>
-      <todo-list :todos="todos" :deleteTodo="deleteTodo"/>
+      <todo-list :todos="todos"/>
       <todo-footer :todos="todos" :deleteCompleteTodos="deleteCompleteTodos" :selectAllTodos="selectAllTodos"/>
     </div>
   </div>
 </template>
 
 <script>
+  import PubSub from 'pubsub-js';
+
   import TodoHeader from "./components/TodoHeader";
   import TodoList from "./components/TodoList";
   import TodoFooter from "./components/TodoFooter";
+  import storageUtil from "./util/storageUtil"
 
   export default {
     name: 'App',
@@ -21,6 +24,12 @@
         //從localStorage讀取todos
         todos: JSON.parse(window.localStorage.getItem('todos_key') || '[]')
       }
+    },
+    mounted() {
+      //訂閱消息
+      PubSub.subscribe('deleteTodo', (msg, index) => {
+        this.deleteTodo(index);
+      })
     },
     methods: {
       addTodo(todo) {
@@ -45,7 +54,7 @@
         deep : true, //深度監視
         handler : function (newValue) {
           //將最新的值(newValue)保存到localStorage
-          window.localStorage.setItem('todos_key', JSON.stringify(newValue));
+          storageUtil.saveTodos(newValue)
         }
       }
     }
