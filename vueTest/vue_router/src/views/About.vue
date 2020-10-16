@@ -1,6 +1,7 @@
 <template>
     <div>
       <h3>About</h3>
+      <input type="text" />
     </div>
 </template>
 

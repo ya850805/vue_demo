@@ -11,7 +11,9 @@
       <hr>
       <span style="width: 70%;">
         <h3>Router-view area</h3>
-        <router-view />
+        <keep-alive>
+          <router-view />
+        </keep-alive>
       </span>
     </div>
   </div>
