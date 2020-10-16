@@ -1,8 +1,9 @@
 <template>
   <div>
       <span v-for="message in messages" :key="message.id">
-        <a>{{message.title}}</a><br>
+        <router-link :to="`/home/message/detail/${message.id}`">{{message.title}}</router-link><br>
       </span>
+    <router-view/>
   </div>
 </template>
 
