@@ -1,8 +1,12 @@
 <template>
   <div>
       <span v-for="message in messages" :key="message.id">
-        <router-link :to="`/home/message/detail/${message.id}`">{{message.title}}</router-link><br>
+        <router-link :to="`/home/message/detail/${message.id}`">{{message.title}}</router-link>
+        <button @click="pushShow(message.id)">push查看</button>
+        <button @click="replaceShow(message.id)">replace查看</button>
+        <br>
       </span>
+    <button @click="$router.back()">back</button>
     <router-view/>
   </div>
 </template>
@@ -25,6 +29,14 @@
         ]
         this.messages = messages;
       }, 1000)
+    },
+    methods: {
+      pushShow(id) {
+        this.$router.push(`/home/message/detail/${id}`);
+      },
+      replaceShow(id) {
+        this.$router.replace(`/home/message/detail/${id}`);
+      }
     }
   }
 </script>
