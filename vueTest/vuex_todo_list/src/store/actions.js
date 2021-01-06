@@ -1,7 +1,8 @@
 /**
  * 接收組件通知觸發mutation調用 間接更新狀態的物件
  * */
-import {ADD_TODO, DELETE_TODO, SELECT_ALL_TODOS, CLEAR_ALL_COMPLETED} from './mutation-types';
+import {ADD_TODO, DELETE_TODO, SELECT_ALL_TODOS, CLEAR_ALL_COMPLETED, RECEIVE_TODOS} from './mutation-types';
+import storageUtil from "../util/storageUtil";
 
 export default {
   addTodo({commit}, todo) {
@@ -16,5 +17,15 @@ export default {
   },
   clearAllCompleted ({commit}) {
     commit(CLEAR_ALL_COMPLETED);
+  },
+
+  //異步獲取todos並更新狀態
+  reqTodos ({commit}) {
+    //模擬
+    setTimeout(() => {
+      // 1. 讀取數據
+      const todos = storageUtil.readTodos();
+      commit(RECEIVE_TODOS, todos);
+    }, 1000);
   }
 }
